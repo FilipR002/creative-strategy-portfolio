@@ -152,3 +152,11 @@ footer a { color: var(--ink); }
   .site-header nav { gap: 14px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
+
+/* scroll cue */
+.scroll-cue { display: inline-flex; align-items: center; gap: 12px; margin-top: 8px; text-decoration: none; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.scroll-cue:hover { color: var(--ink); }
+.scroll-cue svg { color: var(--accent); animation: cue 1.6s ease-in-out infinite; }
+@keyframes cue { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(6px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
+.cta-end .cta-row { margin-top: 0; }
