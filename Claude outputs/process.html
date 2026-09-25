@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>How I work | Filip Radonjic</title>
+  <meta name="description" content="The six-step creative process: account research, competitors, customer voice, concept bank, briefs, launch and read.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --paper: #f2f3f0;
+  --paper-2: #e9ebe7;
+  --ink: #14181c;
+  --muted: #5f6864;
+  --line: #d6dad5;
+  --accent: #b23a2a;
+  --accent-ink: #fff4f1;
+  --measure: 62ch;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* type */
+.mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+.eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+}
+h1, h2, h3 { font-family: "Newsreader", Georgia, serif; font-weight: 400; letter-spacing: -0.015em; text-wrap: balance; }
+h1 { font-size: clamp(42px, 6.4vw, 78px); line-height: 1.02; }
+h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.1; }
+h3 { font-size: 24px; line-height: 1.2; }
+p { max-width: var(--measure); }
+.lede { font-size: clamp(18px, 2vw, 21px); line-height: 1.5; color: var(--muted); max-width: 640px; }
+.stack > * + * { margin-top: 18px; }
+strong { font-weight: 600; }
+
+/* header */
+.site-header { display: flex; align-items: center; justify-content: space-between; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.site-header .brand { text-decoration: none; font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+.site-header nav { display: flex; gap: 22px; font-size: 14px; }
+.site-header nav a { text-decoration: none; color: var(--muted); }
+.site-header nav a:hover, .site-header nav a[aria-current] { color: var(--ink); }
+
+/* hero */
+.hero { padding: 88px 0 72px; display: grid; grid-template-columns: 1fr; gap: 28px; }
+.hero h1 { max-width: 14ch; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px;
+  font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--ink);
+  transition: background .15s, color .15s;
+}
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+.meta { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); }
+
+/* sections */
+section { padding: 72px 0; border-top: 1px solid var(--line); }
+.section-grid { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
+.section-grid .eyebrow { position: sticky; top: 24px; }
+
+/* stat row */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.stats div { background: var(--paper); padding: 22px 20px; }
+.stats .num { font-family: "Newsreader", serif; font-size: 40px; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stats .num small { font-size: 22px; }
+.stats .lbl { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.4; }
+
+/* case cards */
+.cases { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.case-card { border: 1px solid var(--line); background: var(--paper-2); text-decoration: none; display: flex; flex-direction: column; }
+.case-card .thumb { aspect-ratio: 4/3; overflow: hidden; background: var(--line); }
+.case-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.case-card .body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.case-card h3 { font-size: 26px; }
+.case-card p { font-size: 15px; color: var(--muted); }
+.case-card .go { margin-top: auto; padding-top: 10px; font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+.case-card:hover .go { color: var(--accent); }
+
+/* process */
+.steps { counter-reset: step; }
+.step { display: grid; grid-template-columns: 72px 1fr; gap: 24px; padding: 36px 0; border-top: 1px solid var(--line); }
+.step:first-child { border-top: 0; padding-top: 0; }
+.step .n { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--accent); padding-top: 8px; }
+.step h3 { margin-bottom: 12px; }
+.step .ex { margin-top: 18px; padding-left: 18px; border-left: 2px solid var(--accent); }
+.step .ex p { font-size: 15.5px; color: var(--muted); }
+.step .ex .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.closing { font-family: "Newsreader", serif; font-size: clamp(24px, 3vw, 32px); line-height: 1.3; max-width: 26ch; }
+
+/* case study page */
+.case-hero { padding: 72px 0 40px; }
+.case-hero h1 { max-width: 16ch; }
+.result-bar { display: flex; flex-wrap: wrap; gap: 28px 40px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+.result-bar b { font-weight: 500; color: var(--accent); }
+.case-body { padding: 56px 0; }
+.case-body .block { display: grid; grid-template-columns: 220px 1fr; gap: 48px; padding: 36px 0; border-top: 1px solid var(--line); }
+.case-body .block:first-child { border-top: 0; padding-top: 0; }
+.case-body .block h2 { font-size: 26px; position: sticky; top: 24px; }
+.quotes { display: grid; gap: 10px; margin: 16px 0; max-width: var(--measure); }
+.quotes blockquote { font-family: "Newsreader", serif; font-size: 20px; line-height: 1.35; padding: 14px 18px; background: var(--paper-2); border-left: 2px solid var(--accent); }
+.list { list-style: none; max-width: var(--measure); }
+.list li { padding: 12px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 140px 1fr; gap: 16px; font-size: 15.5px; }
+.list li span:first-child { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+.list li em { font-style: normal; font-family: "Newsreader", serif; font-size: 18px; display: block; margin-top: 4px; }
+.next { display: flex; flex-wrap: wrap; gap: 12px; padding: 40px 0 72px; border-top: 1px solid var(--line); }
+
+/* gallery */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; }
+.card { display: block; width: 100%; background: none; border: 0; text-align: left; cursor: zoom-in; font: inherit; color: inherit; }
+.card img { width: 100%; height: auto; }
+.card .frame { border: 1px solid var(--line); background: #fff; padding: 8px; transition: transform .2s; }
+.card:hover .frame { transform: translateY(-3px); }
+.card .label { margin-top: 12px; font-size: 15px; font-weight: 500; display: flex; gap: 10px; }
+.card .label .mono { color: var(--accent); font-size: 13px; padding-top: 2px; }
+.card .desc { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.lightbox { position: fixed; inset: 0; z-index: 10; display: none; background: rgba(20,24,28,.95); flex-direction: column; align-items: center; justify-content: center; padding: 56px 16px 20px; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 130px); width: auto; height: auto; object-fit: contain; }
+.lightbox .bar { color: #e8ebe6; font-family: "IBM Plex Mono", monospace; font-size: 13px; margin-top: 16px; display: flex; gap: 20px; }
+.lightbox .bar a { color: inherit; }
+.lightbox button { position: absolute; background: none; border: 0; color: #fff; cursor: pointer; font-size: 30px; line-height: 1; padding: 12px 16px; }
+.lightbox .close { top: 8px; right: 12px; }
+.lightbox .prev { left: 8px; top: 50%; transform: translateY(-50%); }
+.lightbox .next { right: 8px; top: 50%; transform: translateY(-50%); }
+
+footer { padding: 36px 0 56px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); }
+footer a { color: var(--ink); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (max-width: 860px) {
+  .section-grid, .case-body .block { grid-template-columns: 1fr; gap: 16px; }
+  .section-grid .eyebrow, .case-body .block h2 { position: static; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .cases { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .step { grid-template-columns: 44px 1fr; gap: 14px; }
+  section { padding: 56px 0; }
+  .hero { padding: 56px 0 48px; }
+}
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+  .list li { grid-template-columns: 1fr; gap: 4px; }
+  .btn { width: 100%; justify-content: center; }
+  .site-header nav { gap: 14px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="brand" href="index.html">Filip Radonjic</a>
+      <nav>
+        <a href="process.html" aria-current="page">How I work</a>
+        <a href="face-cream.html">Face cream</a>
+        <a href="calming-balm.html">Calming balm</a>
+        <a href="ads.html">Creatives</a>
+      </nav>
+    </header>
+    <main>
+      <div class="case-hero">
+        <p class="eyebrow">How I work</p>
+        <h1>The same six steps, every product</h1>
+        <p class="lede" style="margin-top:20px">The format is never the strategy by itself. It is the vehicle for a specific message. Everything below exists so the next test is better than the last one, and so the account keeps learning after the first wave.</p>
+      </div>
+
+      <section style="padding-top:40px">
+        <div class="steps">
+
+          <div class="step">
+            <div class="n">01</div>
+            <div>
+              <h3>Account research</h3>
+              <p>What already works on the account, which formats performed, which never did, and where the spend actually sits.</p>
+              <div class="ex">
+                <div class="tag">Example</div>
+                <p>On a skincare account one before/after ad from a year earlier was carrying 88% of the product's spend at a CPA of 21 €, frequency 3, and it was tired. Every format ever tested was product-forward. Nobody had tried a skeptic angle, an identity angle or a category-critique angle. That gap was the brief.</p>
+                <p style="margin-top:10px">On the equestrian account, 15 video concepts turned out to be the same footage re-cut. Retention to 25% was 3 to 9%. The only two winners were short organic reels. That told me the problem was not the product, it was the creative.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">02</div>
+            <div>
+              <h3>Competitor research</h3>
+              <p>Meta Ad Library, market by market. What competitors run, and what has run long enough to be working for them. Not to copy, but to find the gap.</p>
+              <div class="ex">
+                <div class="tag">Example</div>
+                <p>For the calming balm, every UK competitor sold powder or paste in the feed. Nobody sold a scent, one movement, one minute. Germany sold stress through physiology (stomach, skin, magnesium), so the German angle had to be measurable, not behavioural. The Netherlands had no competitor in the category at all: an empty auction and the cheapest place to test.</p>
+                <p style="margin-top:10px">For the face cream, the "needle versus cream" angle was saturated (one competitor alone had over 100 active ads on it), and creams with the same hero ingredient sat between 47 and 163 €. That gave us the price anchor and one angle to avoid.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">03</div>
+            <div>
+              <h3>Voice of customer</h3>
+              <p>Forums, reviews and Reddit, read for the exact words people use about the problem, not the product. The hook comes from here. It is never invented.</p>
+              <div class="ex">
+                <div class="tag">Example</div>
+                <p>Equestrian forums: "Calmers are a placebo effect on the owner." / "It's not a calmer, it just helps him deal with things better." / "I am an anxious rider and my gelding reads me like a book." Three quotes, three angles: the skeptic, the rider who wants a horse that thinks before it reacts, and the rider who is half the problem. The last one became the only angle nobody in the category had.</p>
+                <p style="margin-top:10px">Skincare forums: women talking about creams they threw away, not believing ads, every cream after 40 looking the same. One of the winning hooks was almost verbatim: "How many creams have you already thrown away?"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">04</div>
+            <div>
+              <h3>Hypotheses, personas and the concept bank</h3>
+              <p>Research becomes specific things worth testing, not a list of random formats. Eight to ten personas per product: half the ones everyone targets, half the ones nobody has touched yet. Then one main story above everything, and a bank of angles under it.</p>
+              <div class="ex">
+                <div class="tag">Example</div>
+                <p>Calming balm: 8 personas, 40 angles, 120 hooks, 8 static formats and 6 video formats, mapped angle by angle. Three personas were white space. Test waves ordered by priority, and a note that reads: if only one wave ever gets made, these four angles.</p>
+                <p style="margin-top:10px">Face cream: after the first wave the data looked "fine" everywhere and pulled nowhere. Six small angles, no roof. The fix was one sentence above all of them: skin after 40 does not lose moisture, it loses support. Everything already made fit under it, nothing was thrown away.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">05</div>
+            <div>
+              <h3>Briefs, copy and production</h3>
+              <div class="stack">
+                <p>The brief is where the strategy either survives or dies. My rule is that whoever executes should be able to make the ad without asking me a single question, and should not be able to make a different ad by accident.</p>
+                <p>So one brief per concept, written with as much information as I can give: the persona, the one thought this concept has to land, a sketch of the layout, a description of how the finished ad should look and feel, the hook variations, the rules for this product, and the export names. I want the designer or the editor to see the whole picture, not just their piece of it. When they understand what the ad is for, they make better decisions in the places the brief cannot cover.</p>
+                <p>Every product gets a claim list before anything goes into production: what cannot be said and what to say instead. It is written from the regulation and the platform policy, and it is shared with the client and the creators. That way compliance is a design constraint at the start, not a rejection at the end.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">06</div>
+            <div>
+              <h3>Launch, read, iterate</h3>
+              <div class="stack">
+                <p>One concept per campaign structure, judged at the concept level after a fixed spend or number of days, never on the first cheap or expensive impressions. Ads are not switched off by hand.</p>
+                <p>What I look at first: cost per outbound click, not CPC, because CPC counts taps on "more" that never leave the platform. Then the pattern: several ways in performing means a real angle; one lucky hook means keep learning; clicks but no conversions means message-to-offer or landing page; nothing after meaningful spend means next hypothesis.</p>
+              </div>
+              <div class="ex">
+                <div class="tag">Example</div>
+                <p>On one account I found that 36% of paid clicks never left Meta, and that Facebook let 32 to 59% of clicks through while Instagram let 75 to 89%. Same creative, different placement. That was a media finding, not a creative one, and it changed what got fixed first.</p>
+                <p style="margin-top:10px">The same UGC video ran at ROAS 2,06 from the creator's own profile and 0,38 from the brand's page. The earlier verdict that "UGC does not work" was a delivery mistake, not a content problem.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section>
+        <p class="closing">Every creative should either produce performance or produce a learning that makes the next test better.</p>
+        <div class="cta-row" style="margin-top:28px">
+          <a class="btn btn-primary" href="face-cream.html">Case study: Face cream</a>
+          <a class="btn btn-ghost" href="calming-balm.html">Case study: Calming balm</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>Filip Radonjic · Creative Strategist / Performance Marketer · Ljubljana</span>
+      <a href="https://www.linkedin.com/in/filip-radonjic" target="_blank" rel="noopener">LinkedIn</a>
+    </footer>
+  </div>
+</body>
+</html>

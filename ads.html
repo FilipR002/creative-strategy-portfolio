@@ -1,107 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Ad creatives | Filip Radonjic</title>
+  <meta name="description" content="Gallery of ad creatives from the case studies.">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zenroll Ad Creatives | Filip Radonjic</title>
-  <meta name="description" content="Seven Zenroll static ad formats from the Canter Equestrian creative strategy case study.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="wrap">
     <header class="site-header">
-      <a class="name" href="/">Filip Radonjic</a>
+      <a class="brand" href="/">Filip Radonjic</a>
       <nav>
-        <a href="/assets/Filip_Radonjic_Creative_Strategy_Portfolio_Zenroll.pdf" target="_blank" rel="noopener">Case Study PDF</a>
+        <a href="/process">How I work</a>
+        <a href="/work/face-cream">Face cream</a>
+        <a href="/work/calming-balm">Calming balm</a>
+        <a href="/ads" aria-current="page">Creatives</a>
       </nav>
     </header>
-
     <main>
-      <div class="gallery-head">
-        <a class="back" href="/">&larr; Back to Portfolio</a>
-        <p class="eyebrow">Zenroll / Canter Equestrian &middot; MOF statics</p>
-        <h2>Ad creatives</h2>
-        <p class="section-intro" style="margin-bottom:0">Seven formats, each the vehicle for a specific message. Every image is one execution inside its concept; in testing, each format is paired with multiple hook and copy variations rather than judged from a single version. Click any creative to view it full size.</p>
+      <div class="case-hero">
+        <p class="eyebrow">Creatives</p>
+        <h1>Ad creatives</h1>
+        <p class="lede" style="margin-top:20px">Every image here is one execution inside a concept. In testing, each concept ran with several ways in rather than being judged from a single version. Brand names are blurred. Click any creative to view it full size.</p>
       </div>
-
-      <div class="grid" id="grid"></div>
+      <section style="padding-top:40px">
+        <p class="eyebrow" style="margin-bottom:6px">Face cream for skin over 40</p>
+        <p style="color:var(--muted);font-size:15px;margin-bottom:28px">Slovenian DTC skincare brand · statics across the funnel · <a href="/work/face-cream">read the case study</a></p>
+        <div class="grid" data-group="cream"></div>
+      </section>
+      <section>
+        <p class="eyebrow" style="margin-bottom:6px">Calming balm for horses</p>
+        <p style="color:var(--muted);font-size:15px;margin-bottom:28px">Equestrian DTC brand · seven mid-funnel formats · <a href="/work/calming-balm">read the case study</a></p>
+        <div class="grid" data-group="balm"></div>
+      </section>
     </main>
-
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-size creative">
+      <button class="close" id="lb-close" aria-label="Close">&times;</button>
+      <button class="prev" id="lb-prev" aria-label="Previous">&lsaquo;</button>
+      <button class="next" id="lb-next" aria-label="Next">&rsaquo;</button>
+      <img id="lb-img" src="" alt="">
+      <div class="bar"><span id="lb-label"></span><a id="lb-open" href="#" target="_blank" rel="noopener">Open original</a></div>
+    </div>
+    <script>
+    var ADS = [
+      { g:"cream", file:"CREAM_04", code:"TOF", name:"Typographic manifesto", desc:"The category angle. Fewer promises, better cream." },
+      { g:"cream", file:"CREAM_02", code:"TOF", name:"Category critique", desc:"Thirty years of the same words. Product-forward, dark hero." },
+      { g:"cream", file:"CREAM_03", code:"TOF", name:"Big promise", desc:"Two faces, no retouching. Your skin does not need another big promise." },
+      { g:"cream", file:"CREAM_05", code:"TOF", name:"Routine grid", desc:"Four moments, one routine. 30 seconds morning and evening." },
+      { g:"cream", file:"CREAM_01", code:"MOF", name:"What they promise, what you get", desc:"Comparison against the category, never against a named brand." },
+      { g:"balm", file:"ZENROLL_MOFA_F1_Us_vs_Them_V1", code:"F1", name:"Us vs Them", desc:"Compares the product with the category rather than a named competitor." },
+      { g:"balm", file:"ZENROLL_MOFA_F2_Features_Point_Out_V1", code:"F2", name:"Features Point Out", desc:"Product-led education that makes ingredient transparency part of the argument." },
+      { g:"balm", file:"ZENROLL_MOFA_F3_Problem_to_Solution_V1", code:"F3", name:"Problem to Solution", desc:"Recognisable owner situations turned into one idea: prepare before the difficult moment." },
+      { g:"balm", file:"ZENROLL_MOFA_F4_Text_in_Context_V1", code:"F4", name:"Text in Context", desc:"Feels like a real stable moment. The message lives inside the scene." },
+      { g:"balm", file:"ZENROLL_MOFA_F5_Benefit_Stack_V1", code:"F5", name:"Benefit Stack", desc:"One dominant thought with supporting reasons, designed for mobile reading." },
+      { g:"balm", file:"ZENROLL_MOFA_F6_Listicle_V1", code:"F6", name:"Listicle", desc:"Fast-scanning education built around observable signs instead of promises." },
+      { g:"balm", file:"ZENROLL_MOFA_F7_Education_Grid_V1", code:"F7", name:"Education Grid", desc:"Multiple real situations where owners recognise their own horse." }
+    ];
+    var lb=document.getElementById("lightbox"),lbImg=document.getElementById("lb-img"),lbLabel=document.getElementById("lb-label"),lbOpen=document.getElementById("lb-open"),current=0;
+    ADS.forEach(function(ad,i){var grid=document.querySelector('.grid[data-group="'+ad.g+'"]');var c=document.createElement("button");c.className="card";c.type="button";c.setAttribute("aria-label","View "+ad.name+" full size");
+      c.innerHTML='<div class="frame"><img src="/assets/thumbs/'+ad.file+'.webp" alt="Ad creative, '+ad.name+'" width="720" height="900" loading="lazy"></div><div class="label"><span class="mono">'+ad.code+'</span><span>'+ad.name+'</span></div><p class="desc">'+ad.desc+'</p>';
+      c.addEventListener("click",function(){show(i)});grid.appendChild(c);});
+    function show(i){current=(i+ADS.length)%ADS.length;var ad=ADS[current],src="/assets/ads/"+ad.file+".png";lbImg.src=src;lbImg.alt=ad.name+" full size";lbLabel.textContent=ad.code+" "+ad.name;lbOpen.href=src;lb.classList.add("open");document.body.style.overflow="hidden";}
+    function hide(){lb.classList.remove("open");document.body.style.overflow="";lbImg.src="";}
+    document.getElementById("lb-close").addEventListener("click",hide);
+    document.getElementById("lb-prev").addEventListener("click",function(e){e.stopPropagation();show(current-1)});
+    document.getElementById("lb-next").addEventListener("click",function(e){e.stopPropagation();show(current+1)});
+    lb.addEventListener("click",function(e){if(e.target===lb)hide()});
+    document.addEventListener("keydown",function(e){if(!lb.classList.contains("open"))return;if(e.key==="Escape")hide();if(e.key==="ArrowLeft")show(current-1);if(e.key==="ArrowRight")show(current+1)});
+    </script>
     <footer>
-      <a class="back" href="/" style="margin:0">&larr; Back to Portfolio</a>
-      <span>Filip Radonjic &middot; Creative Strategist / Performance Marketer</span>
+      <span>Filip Radonjic · Creative Strategist / Performance Marketer · Ljubljana</span>
+      <a href="https://www.linkedin.com/in/filip-radonjic" target="_blank" rel="noopener">LinkedIn</a>
     </footer>
   </div>
-
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-size creative">
-    <button class="close" id="lb-close" aria-label="Close">&times;</button>
-    <button class="prev" id="lb-prev" aria-label="Previous">&lsaquo;</button>
-    <button class="next" id="lb-next" aria-label="Next">&rsaquo;</button>
-    <img id="lb-img" src="" alt="">
-    <div class="bar"><span id="lb-label"></span><a id="lb-open" href="#" target="_blank" rel="noopener">Open original</a></div>
-  </div>
-
-  <script>
-    var ADS = [
-      { file: "ZENROLL_MOFA_F1_Us_vs_Them_V1", code: "F1", name: "Us vs Them", desc: "Compares Zenroll with the category rather than a named competitor, so the difference is easy to scan." },
-      { file: "ZENROLL_MOFA_F2_Features_Point_Out_V1", code: "F2", name: "Features Point Out", desc: "Product-led education that makes ingredient transparency part of the selling argument." },
-      { file: "ZENROLL_MOFA_F3_Problem_to_Solution_V1", code: "F3", name: "Problem to Solution", desc: "Turns recognisable horse-owner situations into one clear idea: prepare before the difficult moment." },
-      { file: "ZENROLL_MOFA_F4_Text_in_Context_V1", code: "F4", name: "Text in Context", desc: "Feels like a real stable moment rather than a polished promotion. The message lives inside the scene." },
-      { file: "ZENROLL_MOFA_F5_Benefit_Stack_V1", code: "F5", name: "Benefit Stack", desc: "One dominant thought with supporting reasons, designed for mobile reading." },
-      { file: "ZENROLL_MOFA_F6_Listicle_V1", code: "F6", name: "Listicle", desc: "Fast-scanning education built around observable signs instead of exaggerated promises." },
-      { file: "ZENROLL_MOFA_F7_Education_Grid_V1", code: "F7", name: "Education Grid", desc: "Broadens relevance by showing multiple real situations where owners recognise their own horse." }
-    ];
-
-    var grid = document.getElementById("grid");
-    var lb = document.getElementById("lightbox");
-    var lbImg = document.getElementById("lb-img");
-    var lbLabel = document.getElementById("lb-label");
-    var lbOpen = document.getElementById("lb-open");
-    var current = 0;
-
-    ADS.forEach(function (ad, i) {
-      var card = document.createElement("button");
-      card.className = "card";
-      card.type = "button";
-      card.setAttribute("aria-label", "View " + ad.code + " " + ad.name + " full size");
-      card.innerHTML =
-        '<div class="frame"><img src="/assets/thumbs/' + ad.file + '.webp" alt="Zenroll ad creative, ' + ad.name + ' format" width="720" height="900" loading="lazy"></div>' +
-        '<div class="label"><em>' + ad.code + '</em><span>' + ad.name + '</span></div>' +
-        '<p class="desc">' + ad.desc + '</p>';
-      card.addEventListener("click", function () { show(i); });
-      grid.appendChild(card);
-    });
-
-    function show(i) {
-      current = (i + ADS.length) % ADS.length;
-      var ad = ADS[current];
-      var src = "/assets/ads/" + ad.file + ".png";
-      lbImg.src = src;
-      lbImg.alt = "Zenroll ad creative, " + ad.name + " format, full size";
-      lbLabel.textContent = ad.code + " " + ad.name;
-      lbOpen.href = src;
-      lb.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-    function hide() {
-      lb.classList.remove("open");
-      document.body.style.overflow = "";
-      lbImg.src = "";
-    }
-
-    document.getElementById("lb-close").addEventListener("click", hide);
-    document.getElementById("lb-prev").addEventListener("click", function (e) { e.stopPropagation(); show(current - 1); });
-    document.getElementById("lb-next").addEventListener("click", function (e) { e.stopPropagation(); show(current + 1); });
-    lb.addEventListener("click", function (e) { if (e.target === lb) hide(); });
-    document.addEventListener("keydown", function (e) {
-      if (!lb.classList.contains("open")) return;
-      if (e.key === "Escape") hide();
-      if (e.key === "ArrowLeft") show(current - 1);
-      if (e.key === "ArrowRight") show(current + 1);
-    });
-  </script>
 </body>
 </html>
